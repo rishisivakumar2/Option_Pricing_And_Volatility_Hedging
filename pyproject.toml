@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77,<85"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "option-pricing-and-volatility-hedging"
+version = "0.0.0.dev0"
+description = "European option pricing, volatility, and dynamic hedging research"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy>=2.3,<3",
+    "scipy>=1.16,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<10",
+    "matplotlib>=3.10,<4",
+    "jupyterlab>=4,<5",
+    "ipykernel>=6,<8",
+    "build>=1,<2",
+]
+
+[project.urls]
+Repository = "https://github.com/rishisivakumar2/Option_Pricing_And_Volatility_Hedging"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"

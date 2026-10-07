@@ -4,7 +4,7 @@ A Python research project exploring European option pricing, volatility, and dyn
 
 ## Status
 
-Planning stage. This repository currently contains the project outline only. Pricing code, dependencies, tests, and automated workflows have not been implemented.
+Milestone 0 is complete: the repository has an installable package skeleton, a Python environment specification, and setup instructions. The pricing modules contain documentation placeholders only. Pricing functions, pricing tests, and automated workflows are planned for Milestone 1.
 
 ## Research direction
 
@@ -22,35 +22,61 @@ The Black–Scholes engine will provide the reference prices and Greeks for thes
 
 Here, “solver” means evaluation of the analytical pricing formulas. Implied-volatility inversion and a numerical PDE solver are separate extensions.
 
-## Proposed tools
+## Development environment
 
-Python, NumPy, SciPy, pytest, Matplotlib, and Jupyter. Implement the pricing and Greek formulas directly, using SciPy for the normal distribution functions. Choose compatible versions and record dependencies when implementation begins.
+Use **Python 3.12** (a standard CPython installation), a project-local `.venv`, and pip. The Python minor version is recorded in `.python-version` and enforced in `pyproject.toml`. Python 3.12 receives security support through October 2028; see the [Python release information](https://blog.python.org/2026/10/python-31022-31117/).
 
-## Planned structure
+NumPy and SciPy are runtime dependencies. The `dev` extra adds pytest, Matplotlib, JupyterLab, ipykernel, and the package build tool. Setuptools provides the build backend. Dependency ranges are maintained in `pyproject.toml`; `requirements-dev.lock.txt` records the exact versions verified on Windows with Python 3.12. Resolve and verify a new snapshot when upgrading dependencies. The snapshot is a version pin file, not a cross-platform hash lock.
+
+Implement the pricing and Greek formulas directly in Milestone 1, using SciPy for the normal distribution functions.
+
+## Get started on Windows
+
+Install Python 3.12 if necessary, then run these commands in PowerShell:
+
+```powershell
+git clone https://github.com/rishisivakumar2/Option_Pricing_And_Volatility_Hedging.git
+cd Option_Pricing_And_Volatility_Hedging
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.lock.txt
+.\.venv\Scripts\python.exe -m pip install --no-build-isolation --no-deps -e .
+.\.venv\Scripts\python.exe -c "import options_lab; print(options_lab.__file__)"
+```
+
+These commands use the virtual environment directly; PowerShell activation is optional. If your Python installation does not include the `py` launcher, use the path to your Python 3.12 executable for the environment creation command.
+
+On macOS/Linux, create the environment with `python3.12 -m venv .venv` and use `.venv/bin/python` in place of `.\.venv\Scripts\python.exe` in subsequent commands. The pinned dependency snapshot was verified on Windows; other platforms may require a fresh dependency resolution.
+
+For a fresh resolution of the declared dependency ranges instead of the snapshot:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+```
+
+Launch notebooks with `.\.venv\Scripts\python.exe -m jupyterlab` from the repository root. Once pricing tests exist, run `.\.venv\Scripts\python.exe -m pytest`. At Milestone 0, no tests are collected.
+
+## Current structure
 
 ```text
+.python-version
+.gitignore
+pyproject.toml
+requirements-dev.lock.txt
 src/options_lab/
     __init__.py
     black_scholes.py
     greeks.py
-tests/
-    test_black_scholes.py
-    test_greeks.py
-notebooks/
-    01_black_scholes_validation.ipynb
-examples/
-    price_option.py
-figures/
-.github/workflows/
-    tests.yml
-pyproject.toml
+tests/README.md
+notebooks/README.md
+examples/README.md
+figures/README.md
 README.md
 docs/
     ROADMAP.md
     MODEL_SPEC.md
 ```
 
-This is a proposed structure, not a list of implemented files. Reusable calculations belong in the package; notebooks import the package and explain experiments.
+Reusable calculations belong in the package; notebooks import the package and explain experiments. Milestone 1 will add the validation notebook, executable examples, actual tests, and the automated testing workflow.
 
 ## Milestone completion criteria
 

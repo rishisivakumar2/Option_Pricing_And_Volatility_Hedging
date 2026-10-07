@@ -6,8 +6,10 @@
 - [x] Define model conventions and validation requirements.
 - [x] Create the GitHub repository `Option_Pricing_And_Volatility_Hedging`.
 - [x] Publish the initial project documentation.
-- [ ] Choose the Python version and dependency management approach.
-- [ ] Create the package structure and environment when coding begins.
+- [x] Choose Python 3.12 with pip, a local virtual environment, and `pyproject.toml` dependency declarations.
+- [x] Create the installable `src/options_lab` package skeleton and a local development environment.
+
+Milestone 0 is complete. The package installs and imports, and exact development dependency versions are recorded in `requirements-dev.lock.txt`. Setup instructions are in the README. The pricing modules contain documentation placeholders; all pricing functionality remains in Milestone 1.
 
 ## Milestone 1 — Analytical Black–Scholes engine
 
@@ -68,7 +70,7 @@ Market-data volatility surfaces, binomial trees, numerical PDE methods, American
 
 ## Suggested GitHub issue titles
 
-1. Define package environment and installation
+1. Define package environment and installation (completed in Milestone 0)
 2. Implement European call and put pricing
 3. Validate pricing identities and boundary cases
 4. Implement and validate analytical Greeks
